@@ -116,6 +116,8 @@ public class Song{
         return length;
     }
 
-    
-    
+    public String toString(){
+        String format = "%-26s%-27s%-27s%-12u\n";
+        return String.format(format, name, artist, albumString, length);
+    }
 }
