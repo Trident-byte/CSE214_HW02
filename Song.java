@@ -23,10 +23,12 @@ public class Song{
     public Song(String name, String artist, String albumLength, int length){
         this.name = name;
         this.artist = artist;
+        this.albumString = albumLength;
+        this.length = length;
     }
 
     /**
-     * Sets the value of the field <code>name</code> to the <code>name</code>
+     * Sets the value of the field <code>name</code> to the <code>newName</code>
      * 
      * @param newName
      *    String that represents the new value of the name field
@@ -36,7 +38,7 @@ public class Song{
     }
 
     /**
-     * Sets the value of the field <code>artist</code> to the <code>artist</code>
+     * Sets the value of the field <code>artist</code> to the <code>newAtist</code>
      * 
      * @param newArtist
      *    String that represents the new value of the artist field
@@ -46,13 +48,23 @@ public class Song{
     }
 
     /**
-     * Sets the value of the field <code>albumString</code> to the <code>albumString</code>
+     * Sets the value of the field <code>albumString</code> to the <code>newAlbumString</code>
      * 
      * @param newAlbumString
      *    String that represents the new value of the albumString field
      **/
     public void setAlbumString(String newAlbumString){
         albumString = newAlbumString;
+    }
+
+    /**
+     * Sets the value of the field <code>length</code> to the <code>newLength</code>
+     * 
+     * @param newLength
+     *    int that represents the new value of the length field
+     **/
+    public void setLength(int newLength){
+        length = newLength;
     }
 
 

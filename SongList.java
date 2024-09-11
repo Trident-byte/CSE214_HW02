@@ -7,6 +7,10 @@
  *    Stony Brook ID: brchau  
  *    Recitation: 02
 **/
+a
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 public class SongList {
     private SongNode head;
@@ -24,6 +28,25 @@ public class SongList {
         //Creates a song list with an initial node given
         head = inital;
         tail = inital;
+        cursor = inital;
         size = 1;
+    }
+
+    public void Play(String name){
+        //Play the audio file based on name in cursor song node
+    }
+
+    public void cursorFowards(){
+        if(cursor != tail)
+        {
+            cursor = cursor.getNext();
+        }
+    }
+
+    public void cursorBackwards(){
+        if(cursor != head)
+        {
+            cursor = cursor.getPrev();
+        }
     }
 }
