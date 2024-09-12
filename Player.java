@@ -53,13 +53,28 @@ public class Player {
                 addApplicantUI(input, songList);
             }
             else if(option.equals("F")){
-                songList.cursorFowards();
+                try{
+                    songList.cursorFowards();
+                }
+                catch(NullCursor exception){
+                    System.out.println(exception.getMessage());
+                }
             }
             else if(option.equals("B")){
-                songList.cursorBackwards();
+                try{
+                    songList.cursorBackwards();
+                }
+                catch(NullCursor exception){
+                    System.out.println(exception.getMessage());
+                }
             }
             else if(option.equals("R")){
-                songList.removeCursor();
+                try{
+                    songList.removeCursor();
+                }
+                catch(NullCursor exception){
+                    System.out.println(exception.getMessage());
+                }
             }
             else if(option.equals("L")){
                 songList.play(songList.getCursor().getSong().getName());
