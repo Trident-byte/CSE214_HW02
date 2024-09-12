@@ -61,10 +61,18 @@ public class SongList {
      */
     public void play(String name) throws IllegalArgumentException{
         //Play the audio file based on name in cursor song node
+        SongNode pointer = head;
+        while(pointer != null && !pointer.getSong().getName().equals(name)){
+            pointer = pointer.getNext();
+        }
+        if(pointer == null){
+            throw new IllegalArgumentException();
+        }
         try {
             File audioFile = new File(name + ".wav");
             AudioInputStream audio = AudioSystem.getAudioInputStream(audioFile);
             Clip c = AudioSystem.getClip();
+            System.out.printf("'%s' by %s is now playing.", pointer.getSong().getName(), pointer.getSong().getArtist());
             c.open(audio);
             c.start();
         }
@@ -88,12 +96,18 @@ public class SongList {
      *    Indicates that the list is empty
      */
     public void cursorFowards() throws NullCursor{
-        if(cursor == null){
+        if(cursor == null)
+        {
             throw new NullCursor();
         }
         if(cursor != tail)
         {
             cursor = cursor.getNext();
+            System.out.println("Cursor moved to the next song.");
+        }
+        else
+        {
+            System.out.println("Already at the end of the playlist.");
         }
     }
 
@@ -111,12 +125,18 @@ public class SongList {
      *    Indicates that the list is empty
      */
     public void cursorBackwards() throws NullCursor{
-        if(cursor == null){
+        if(cursor == null)
+        {
             throw new NullCursor();
         }
         if(cursor != head)
         {
             cursor = cursor.getPrev();
+            System.out.println("Cursor moved to the previous song.");
+        }
+        else
+        {
+            System.out.println("Already at the beginning of the playlist.");
         }
     }
 
@@ -191,6 +211,7 @@ public class SongList {
      *    The <code>Song</code> that was randomly selected
      */
     public Song random(){
+        System.out.println("Playing a random song...");
         Song randomSong = randomChooser().getSong();
         play(randomSong.getName());
         return randomSong;

@@ -81,9 +81,11 @@ public class Player {
             }
             else if(option.equals("C")){
                 songList.deleteAll();
+                System.out.println("Playlist cleared.");
             }
             else if(option.equals("S")){
                 songList.shuffle();
+                System.out.println("Playlist shuffled.");
             }
             else if(option.equals("Z")){
                 songList.random();
@@ -92,7 +94,15 @@ public class Player {
                 songList.printPlayerList();
             }
             else if(option.equals("T")){
-                System.out.println(songList.getSize());
+                int size = songList.getSize();
+                if(size == 0)
+                {
+                    System.out.println("The playlist is empty");
+                }
+                else
+                {
+                    System.out.println("Your playlist contains " + size + " songs.");
+                }
             }
             else if(option.equals("Q")){
                 running = false;
@@ -136,6 +146,29 @@ public class Player {
         length = getInt(prompt, "Enter Song Length: ");
         Song nextSong = new Song(songName, artistName, albumName, length);
         list.insertAfterCursor(nextSong);
+        System.out.printf("'%s' by %s is added to your playlist.\n", songName, artistName);
+    }
+
+    /**
+     * Gives the user a prompt to give info about the song to
+     * play to the <code>SongList</code>.
+     *
+     * @param prompt
+     *     The scanner used to take in user input
+     * @param list
+     *     THe <code>SongList</code> that the method will work with
+     */
+    private static void playSongUI(Scanner prompt, SongList list){
+        String songName = null;
+        songName = getString(prompt, "Enter name of song to play: ");
+        try
+        {
+            list.play(songName);
+        }
+        catch(IllegalArgumentException e){
+            System.out.printf("'%s' is not found.\n", songName);
+        }
+
     }
 
     /**
