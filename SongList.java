@@ -203,6 +203,8 @@ public class SongList {
         while(size > 0){
             try{
                 SongNode randomNode = removeSong(randomChooser());
+                randomNode.setNext(null);
+                randomNode.setPrev(null);
                 newList.insertNode(randomNode);
             }
             catch(NullCursor e){
