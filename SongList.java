@@ -137,7 +137,12 @@ public class SongList {
      */
     public Song removeCursor() throws NullCursor{
         Song removedSong = cursor.getSong();
-        removeSong(cursor);
+        try{
+            removeSong(cursor);
+        }
+        catch(Exception e){
+            throw new NullCursor();
+        }
         return removedSong;
     }
 
@@ -170,7 +175,7 @@ public class SongList {
      */
     public void insertAfterCursor(Song newSong) throws IllegalArgumentException{
         if(newSong == null){
-            throw new IllegalArgumentException("Song is not valiad");
+            throw new IllegalArgumentException("Song is not valid");
         }
         SongNode newNode = new SongNode(newSong);
         insertNode(newNode);
@@ -200,6 +205,7 @@ public class SongList {
      */
     public void shuffle(){
         SongList newList = new SongList();
+        SongNode orignalCursor = cursor;
         while(size > 0){
             try{
                 SongNode randomNode = removeSong(randomChooser());
@@ -207,12 +213,13 @@ public class SongList {
                 randomNode.setPrev(null);
                 newList.insertNode(randomNode);
             }
-            catch(NullCursor e){
+            catch(IllegalArgumentException e){
                 break;
             }
         }
         head = newList.head;
         tail = newList.tail;
+        cursor = orignalCursor;
         size = newList.size;
     }
 
@@ -333,14 +340,35 @@ public class SongList {
         return header;
     }
 
-    private SongNode removeSong(SongNode node) throws NullCursor{
+    private SongNode removeSong(SongNode node) throws IllegalArgumentException{
+        System.out.println(node.getSong().getName());
+        size--;
         if(node == null)
         {
-            throw new NullCursor();
+            throw new IllegalArgumentException();
         }
         else if(node == head)
         {
             head = node.getNext();
+            if(head != null){
+                head.setPrev(null);
+            }
+            else
+            {
+                deleteAll();
+            }
+            return node;
+        }
+        else if(node == tail) {
+            tail = node.getPrev();
+            if(tail != null){
+                tail.setNext(null);
+            }
+            else
+            {
+                deleteAll();
+            }
+            return node;
         }
         else
         {
@@ -348,7 +376,7 @@ public class SongList {
             node.getNext().setPrev(node.getPrev());
         }
 
-        if(node.getNext() == null)
+        if(size != 0 && node.getNext() == null)
         {
             node = node.getPrev();
         }
@@ -356,7 +384,6 @@ public class SongList {
         {
             node = node.getNext();
         }
-        size--;
         return node;
     }
 
@@ -365,13 +392,15 @@ public class SongList {
         {
             head = newNode;
             tail = newNode;
-            cursor = newNode;
         }
         else if(cursor == tail){
             tail.setNext(newNode);
             newNode.setPrev(tail);
             tail = newNode;
-            cursor = tail;
+        }
+        else if(cursor == head){
+            head.setPrev(newNode);
+            newNode.setNext(head);
         }
         else
         {
@@ -380,6 +409,7 @@ public class SongList {
             cursor.getNext().setPrev(newNode);
             cursor.setNext(newNode);
         }
+        cursor = newNode;
         size++;
     }
 
