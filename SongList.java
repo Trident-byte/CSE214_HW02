@@ -4,7 +4,7 @@
  * 
  * @author Brian Chau
  *    email brian.chau@stonybrook.edu
- *    Stony Brook ID: brchau  
+ *    Stony Brook ID: 116125954  
  *    Recitation: 02
 **/
 
@@ -19,11 +19,20 @@ public class SongList {
     private SongNode cursor;
     private int size;
 
+    /**
+     * Creates an empty <code>SongList</code> object
+     */
     public SongList()
     {
 
     }
 
+    /**
+     * Creates a <code>SongList</code> object with an initial node
+     * 
+     * @param inital
+     *    The first node of the linked list
+     */
     public SongList(SongNode inital)
     {
         //Creates a song list with an initial node given
@@ -33,6 +42,23 @@ public class SongList {
         size = 1;
     }
 
+    /**
+     * Plays the song indicated by name. 
+     * The song must be present in your current 
+     * working directory to play
+     * 
+     * <dt>Precondition
+     *    <dd>The name must match an actual song name in the playlist and there must be a file associated with it.
+     * 
+     * <dt>Postcondition
+     *    <dd>The song is now playing.
+     * 
+     * @param name
+     *    The name of song to be played
+     * @throws IllegalArgumentException
+     *    Indicates that the provided name does not correspond 
+     *    to a song in the playlist, or that the wav file could not be found.
+     */
     public void play(String name) throws IllegalArgumentException{
         //Play the audio file based on name in cursor song node
         try {
@@ -48,52 +74,150 @@ public class SongList {
         }
     }
 
-    public void cursorFowards(){
+    /**
+     * Moves the cursor to point at the next SongNode. 
+     * This and the cursorBackwards() method are the user's main way of moving around the Linked List.
+     * 
+     * <dt>Precondition
+     *   <dd>The list is not empty(cursor is not null)
+     * 
+     * <dt>Postcondition
+     *    <dd>The cursor has been advanced to the next SongNode, or has remained at the tail of the list.
+     * 
+     * @throws NullCursor
+     *    Indicates that the list is empty
+     */
+    public void cursorFowards() throws NullCursor{
+        if(cursor == null){
+            throw new NullCursor();
+        }
         if(cursor != tail)
         {
             cursor = cursor.getNext();
         }
     }
 
-    public void cursorBackwards(){
+    /**
+     * Moves the cursor to point at the next SongNode. 
+     * This and the cursorFowards() method are the user's main way of moving around the Linked List.
+     * 
+     * <dt>Precondition
+     *   <dd>The list is not empty(cursor is not null)
+     * 
+     * <dt>Postcondition
+     *    <dd>The cursor has been moved back to the previous SongNode, or has remained at the head of the list.
+     * 
+     * @throws NullCursor
+     *    Indicates that the list is empty
+     */
+    public void cursorBackwards() throws NullCursor{
+        if(cursor == null){
+            throw new NullCursor();
+        }
         if(cursor != head)
         {
             cursor = cursor.getPrev();
         }
     }
 
-    public Song removeCursor() throws IllegalArgumentException{
+    /**
+     * Removes the SongNode referenced by the cursor and returns the Song contained within the node.
+     * 
+     * <dt>Precondition
+     *   <dd>The cursor is not null.
+     * 
+     * <dt>Postcondition
+     *    <dd>The SongNode referenced by the cursor has been removed from the playlist.
+     *    <dd>The cursor now references the next node, or the previous node if no next node exists.
+     * 
+     * @return
+     *    The Song contained within the removed SongNode.
+     * @throws NullCursor
+     *    Indicates that the list is empty
+     */
+    public Song removeCursor() throws NullCursor{
         Song removedSong = cursor.getSong();
         removeSong(cursor);
         return removedSong;
     }
 
+    /**
+     * Returns the size of the linked list using the number in the size field
+     * 
+     * @return
+     *    The value in the size field
+     */
     public int getSize(){
         return size;
     }
 
-    public void insertAfterCursor(Song newSong){
+    /**
+     * Inserts a song into the playlist after the cursor position. 
+     * The user will have to move the cursor using the cursor methods 
+     * above to add a song after a specific song if they want.
+     * 
+     * @param newSong
+     *    The <code>Song</code> to be inserted into the playlist.
+     * 
+     * <dt>Postcondition
+     *    <dd>The new Song is inserted into the playlist after the position of the cursor.
+     *    <dd>All Song objects previously in the playlist are still in the playlist, and 
+     *        the order of the playlist is preserved.  
+     *    <dd>The cursor now points to the inserted node.
+     * 
+     * @throws IllegalArgumentException
+     *    Indicates that the <code>newSong</code> is null
+     */
+    public void insertAfterCursor(Song newSong) throws IllegalArgumentException{
+        if(newSong == null){
+            throw new IllegalArgumentException("Song is not valiad");
+        }
         SongNode newNode = new SongNode(newSong);
         insertNode(newNode);
     }
 
+    /**
+     * Select one of the songs in the playlist and play it at random.
+     * 
+     * <dt>Postcondition
+     *    <dd>The song will now be playing
+     * 
+     * @return
+     *    The <code>Song</code> that was randomly selected
+     */
     public Song random(){
-
-        return randomChooser().getSong();
+        Song randomSong = randomChooser().getSong();
+        play(randomSong.getName());
+        return randomSong;
     }
 
+    /**
+     * Randomly shuffles the order of the songs contained within the playlist.
+     * 
+     * <dt>Postcondition
+     *    <dd>The playlist is randomly reordered.
+     *    <dd><code>Cursor</code> references the <code>SongNode</code> which contains the same <code>Song</code> as when this method was entered.
+     */
     public void shuffle(){
         SongList newList = new SongList();
         while(size > 0){
-            SongNode randomNode = removeSong(randomChooser());
-            newList.insertNode(randomNode);
+            try{
+                SongNode randomNode = removeSong(randomChooser());
+                newList.insertNode(randomNode);
+            }
+            catch(NullCursor e){
+                break;
+            }
         }
         head = newList.head;
         tail = newList.tail;
-        cursor = newList.cursor;
         size = newList.size;
     }
 
+    /**
+     * Prints the playlist in a neatly-formatted table.
+     * 
+     */
     public void printPlayerList(){
         System.out.print(formHeading());
         SongNode pointer = head;
@@ -107,6 +231,12 @@ public class SongList {
         }
     }
 
+    /**
+     * This will simply delete all of the songs from the playlist.
+     * 
+     * <dt>Postcondition
+     *    <dd>All songs have been removed.
+     */
     public void deleteAll(){
         head = null;
         tail = null;
@@ -114,6 +244,12 @@ public class SongList {
         size = 0;
     }
 
+    /**
+     * Returns a neatly formatted String representation of the playlist. See the Sample I/O for layout.
+     * 
+     * @return
+     *    A neatly formatted String representing the playlist in tabular form.
+     */
     public String toString(){
         String fullTable = formHeading();
         SongNode pointer = head;
@@ -195,10 +331,10 @@ public class SongList {
         return header;
     }
 
-    private SongNode removeSong(SongNode node){
+    private SongNode removeSong(SongNode node) throws NullCursor{
         if(node == null)
         {
-            throw new IllegalArgumentException("The playlist is empty");
+            throw new NullCursor();
         }
         else if(node == head)
         {

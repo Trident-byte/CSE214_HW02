@@ -4,7 +4,7 @@
  * 
  * @author Brian Chau
  *    email brian.chau@stonybrook.edu
- *    Stony Brook ID: brchau  
+ *    Stony Brook ID: 116125954  
  *    Recitation: 02
 **/
 
@@ -13,11 +13,20 @@ public class SongNode {
     private SongNode next;
     private Song song;
 
+    /**
+     * Creates an empty <code>SongNode</code> object
+     */
     public SongNode()
     {
         
     }
 
+    /**
+     * Creates a <code>SongNode</code> object given a <code>Song</code>
+     * 
+     * @param song
+     *   The Song to be put in the song field
+     */
     public SongNode(Song song){
         this.song = song;
     }

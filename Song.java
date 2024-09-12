@@ -3,7 +3,7 @@
  * 
  * @author Brian Chau
  *    email brian.chau@stonybrook.edu
- *    Stony Brook ID: brchau  
+ *    Stony Brook ID: 116125954  
  *    Recitation: 02
 **/
 
@@ -13,6 +13,11 @@ public class Song{
     private String albumString;
     private int length;
     
+    /**
+     * Creates an empty <code>Song</code> object
+     * 
+     * 
+     */
     public Song()
     {
         name = "";
@@ -20,6 +25,18 @@ public class Song{
         albumString = "";
     }
 
+    /**
+     * Creates a <code>Song</code> object with given values
+     * 
+     * @param name
+     *   The String to be put in the name field
+     * @param artist
+     *   The String to be put in the artist field
+     * @param albumLength
+     *   The String to be put in the albumLength field
+     * @param length
+     *   The integer to be put in the length field
+     */
     public Song(String name, String artist, String albumLength, int length){
         this.name = name;
         this.artist = artist;
