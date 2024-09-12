@@ -93,9 +93,9 @@ public class Player {
     private static void printPrompt(){
         System.out.println("(A)  Add Song");
         System.out.println("(F)  Go to Next Song");
-        System.out.println("(B)  Remove Song from Playlist");
-        System.out.println("(R)  Play a Song");
-        System.out.println("(L)  Refine Search");
+        System.out.println("(B)  Go to Previous Song");
+        System.out.println("(R)  Remove Song from Playlist");
+        System.out.println("(L)  Play a Song");
         System.out.println("(C)  Clear the Playlist");
         System.out.println("(S)  Shuffle Playlist");
         System.out.println("(Z)  Random Song");

@@ -226,11 +226,12 @@ public class SongList {
         if(head == null)
         {
             head = newNode;
-            tail = head;
-            cursor = head;
+            tail = newNode;
+            cursor = newNode;
         }
         else if(cursor == tail){
             tail.setNext(newNode);
+            newNode.setPrev(tail);
             tail = newNode;
             cursor = tail;
         }
