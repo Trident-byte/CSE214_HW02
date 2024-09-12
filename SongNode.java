@@ -43,7 +43,8 @@ public class SongNode {
      **/
 
      public SongNode getNext(){
-        return next;
+
+         return next;
     }
 
     /**
@@ -55,7 +56,8 @@ public class SongNode {
      **/
 
      public Song getSong(){
-        return song;
+
+         return song;
     }
 
     /**
@@ -65,6 +67,7 @@ public class SongNode {
      *    SongNode that represents the new value of the prev field
      **/
     public void setPrev(SongNode newPrev){
+
         prev = newPrev;
     }
 
@@ -75,6 +78,7 @@ public class SongNode {
      *    SongNode that represents the new value of the next field
      **/
     public void setNext(SongNode newNext){
+
         next = newNext;
     }
 

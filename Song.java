@@ -117,7 +117,7 @@ public class Song{
     }
 
     public String toString(){
-        String format = "%-26s%-27s%-27s%-12u\n";
+        String format = "%-26s%-27s%-27s%-12u";
         return String.format(format, name, artist, albumString, length);
     }
 }
