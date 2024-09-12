@@ -81,7 +81,7 @@ public class Player {
                 songList.printPlayerList();
             }
             else if(option.equals("T")){
-                songList.getSize();
+                System.out.println(songList.getSize());
             }
             else if(option.equals("Q")){
                 running = false;
@@ -91,16 +91,17 @@ public class Player {
     }
 
     private static void printPrompt(){
-        System.out.println("(A)   Add Applicant");
-        System.out.println("(R)   Remove Applicant");
-        System.out.println("(G)   Get Applicant");
-        System.out.println("(P)   Print List");
-        System.out.println("(RS)  Refine Search");
-        System.out.println("(S)   Size");
-        System.out.println("(B)   Backup");
-        System.out.println("(CB)  Compare Backup");
-        System.out.println("(RB)  Revert Backup");
-        System.out.println("(Q)   Quit");
+        System.out.println("(A)  Add Song");
+        System.out.println("(F)  Go to Next Song");
+        System.out.println("(B)  Remove Song from Playlist");
+        System.out.println("(R)  Play a Song");
+        System.out.println("(L)  Refine Search");
+        System.out.println("(C)  Clear the Playlist");
+        System.out.println("(S)  Shuffle Playlist");
+        System.out.println("(Z)  Random Song");
+        System.out.println("(P)  Print Playlist");
+        System.out.println("(T)  Get the total amount of songs in the playlist");
+        System.out.println("(Q)  Exit the playlist");
 
     }
 

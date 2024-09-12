@@ -103,6 +103,7 @@ public class SongList {
                 System.out.print(" <-");
             }
             System.out.println();
+            pointer = pointer.getNext();
         }
     }
 
@@ -187,7 +188,7 @@ public class SongList {
     }
 
     private String formHeading(){
-        String format = "%-26s%-27s%-27s%-12u\n";
+        String format = "%-26s%-27s%-27s%-12s\n";
         String heading = String.format(format, "Song", "| Artist", "| Album", "| Length (s)");
         String seperator = "_".repeat(91) + "\n";
         String header = heading + seperator;
