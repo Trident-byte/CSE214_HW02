@@ -54,7 +54,7 @@ public class Player {
             }
             else if(option.equals("F")){
                 try{
-                    songList.cursorFowards();
+                    songList.cursorForwards();
                 }
                 catch(NullCursor exception){
                     System.out.println(exception.getMessage());
@@ -70,14 +70,22 @@ public class Player {
             }
             else if(option.equals("R")){
                 try{
-                    songList.removeCursor();
+                    Song song = songList.removeCursor();
+                    System.out.printf("'%s' by %s was removed " +
+                      "from the playlist", song.getName(), song.getArtist());
                 }
-                catch(NullCursor exception){
-                    System.out.println(exception.getMessage());
+                catch(Exception e){
+                    System.out.println(e.getMessage());
                 }
             }
             else if(option.equals("L")){
-                songList.play(songList.getCursor().getSong().getName());
+                String songName = prompter(input, "Please Enter the Song Name: ");
+                try {
+                    songList.play(songName);
+                }
+                catch(Exception e){
+                    System.out.printf("'%s' not found\n", songName);
+                }
             }
             else if(option.equals("C")){
                 songList.deleteAll();
@@ -97,7 +105,7 @@ public class Player {
                 int size = songList.getSize();
                 if(size == 0)
                 {
-                    System.out.println("The playlist is empty");
+                    System.out.println("Your playlist is empty");
                 }
                 else
                 {

@@ -95,7 +95,7 @@ public class SongList {
      * @throws NullCursor
      *    Indicates that the list is empty
      */
-    public void cursorFowards() throws NullCursor{
+    public void cursorForwards() throws NullCursor{
         if(cursor == null)
         {
             throw new NullCursor();
@@ -156,9 +156,10 @@ public class SongList {
      *    Indicates that the list is empty
      */
     public Song removeCursor() throws NullCursor{
-        Song removedSong = cursor.getSong();
+        Song removedSong = null;
         try{
-            removeSong(cursor);
+            removedSong = cursor.getSong();
+            cursor = removeSong(cursor);
         }
         catch(Exception e){
             throw new NullCursor();
@@ -362,13 +363,13 @@ public class SongList {
     }
 
     private SongNode removeSong(SongNode node) throws IllegalArgumentException{
-        System.out.println(node.getSong().getName());
         size--;
         if(node == null)
         {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("The node is null");
         }
-        else if(node == head)
+        System.out.println(node.getSong().getName());
+        if(node == head)
         {
             head = node.getNext();
             if(head != null){
@@ -395,14 +396,6 @@ public class SongList {
         {
             node.getPrev().setNext(node.getNext());
             node.getNext().setPrev(node.getPrev());
-        }
-
-        if(size != 0 && node.getNext() == null)
-        {
-            node = node.getPrev();
-        }
-        else
-        {
             node = node.getNext();
         }
         return node;
@@ -422,6 +415,7 @@ public class SongList {
         else if(cursor == head){
             head.setPrev(newNode);
             newNode.setNext(head);
+            head = newNode;
         }
         else
         {

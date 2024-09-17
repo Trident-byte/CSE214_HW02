@@ -13,6 +13,6 @@ public class NullCursor extends Exception{
      * Creates a new <code>NullCursor</code> exception 
      */
     public NullCursor(){
-        super("The list is empty");
+        super("Your playlist is empty");
     }
 }
