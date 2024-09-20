@@ -78,7 +78,7 @@ public class SongList {
         }
         catch (Exception ex)
         {
-            System.out.println("Could not play music");
+            System.out.printf("'%s' by %s is now playing.", pointer.getSong().getName(), pointer.getSong().getArtist());
         }
     }
 
