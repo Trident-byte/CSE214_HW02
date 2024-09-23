@@ -4,7 +4,7 @@
  * 
  * @author Brian Chau
  *    email brian.chau@stonybrook.edu
- *    Stony Brook ID: 116125954  
+ *    Stony Brook ID: brchau  
  *    Recitation: 02
 **/
 import java.util.Scanner;
@@ -72,7 +72,7 @@ public class Player {
                 try{
                     Song song = songList.removeCursor();
                     System.out.printf("'%s' by %s was removed " +
-                      "from the playlist", song.getName(), song.getArtist());
+                      "from the playlist\n", song.getName(), song.getArtist());
                 }
                 catch(Exception e){
                     System.out.println(e.getMessage());

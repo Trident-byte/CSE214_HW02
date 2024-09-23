@@ -157,15 +157,12 @@ public class SongList {
      */
     public Song removeCursor() throws NullCursor{
         Song removedSong = null;
-        if(cursor == null){
-            throw new NullCursor();
-        }
         try{
             removedSong = cursor.getSong();
             cursor = removeSong(cursor);
         }
         catch(Exception e){
-            System.out.println(e.getMessage());
+            throw new NullCursor();
         }
         return removedSong;
     }
@@ -233,10 +230,11 @@ public class SongList {
         SongNode orignalCursor = cursor;
         while(size > 0){
             try{
-                SongNode randomNode = removeSong(randomChooser());
-                randomNode.setNext(null);
-                randomNode.setPrev(null);
-                newList.insertNode(randomNode);
+                SongNode randomNode = randomChooser();
+                SongNode newNode = new SongNode(randomNode.getSong());
+                newList.insertNode(newNode);
+                this.removeSong(randomNode);
+                // this.printPlayerList();
             }
             catch(IllegalArgumentException e){
                 break;
@@ -371,7 +369,7 @@ public class SongList {
         {
             throw new IllegalArgumentException("The node is null");
         }
-        System.out.println(node.getSong().getName());
+        // System.out.println(node.getSong().getName());
         if(node == head)
         {
             head = node.getNext();
@@ -434,6 +432,7 @@ public class SongList {
     private SongNode randomChooser(){
         int randPos = (int) (Math.random() * size);
         SongNode pointer = head;
+        // System.out.println(pointer + " " + size);
         while(randPos > 0 && pointer != null){
             pointer = pointer.getNext();
             randPos--; //Removes one from randPos to prevent use of another variable
