@@ -157,12 +157,15 @@ public class SongList {
      */
     public Song removeCursor() throws NullCursor{
         Song removedSong = null;
+        if(cursor == null){
+            throw new NullCursor();
+        }
         try{
             removedSong = cursor.getSong();
             cursor = removeSong(cursor);
         }
         catch(Exception e){
-            throw new NullCursor();
+            System.out.println(e.getMessage());
         }
         return removedSong;
     }

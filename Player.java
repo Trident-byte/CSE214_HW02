@@ -4,7 +4,7 @@
  * 
  * @author Brian Chau
  *    email brian.chau@stonybrook.edu
- *    Stony Brook ID: brchau  
+ *    Stony Brook ID: 116125954  
  *    Recitation: 02
 **/
 import java.util.Scanner;
@@ -155,28 +155,6 @@ public class Player {
         Song nextSong = new Song(songName, artistName, albumName, length);
         list.insertAfterCursor(nextSong);
         System.out.printf("'%s' by %s is added to your playlist.\n", songName, artistName);
-    }
-
-    /**
-     * Gives the user a prompt to give info about the song to
-     * play to the <code>SongList</code>.
-     *
-     * @param prompt
-     *     The scanner used to take in user input
-     * @param list
-     *     THe <code>SongList</code> that the method will work with
-     */
-    private static void playSongUI(Scanner prompt, SongList list){
-        String songName = null;
-        songName = getString(prompt, "Enter name of song to play: ");
-        try
-        {
-            list.play(songName);
-        }
-        catch(IllegalArgumentException e){
-            System.out.printf("'%s' is not found.\n", songName);
-        }
-
     }
 
     /**
