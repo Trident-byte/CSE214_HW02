@@ -231,8 +231,12 @@ public class SongList {
         while(size > 0){
             try{
                 SongNode randomNode = randomChooser();
-                SongNode newNode = new SongNode(randomNode.getSong());
+                Song randomSong = randomNode.getSong();
+                SongNode newNode = new SongNode(randomSong);
                 newList.insertNode(newNode);
+                if(randomSong == orignalCursor.getSong()){
+                    orignalCursor = newNode;
+                }
                 this.removeSong(randomNode);
                 // this.printPlayerList();
             }

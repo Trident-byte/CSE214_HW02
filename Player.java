@@ -4,7 +4,7 @@
  * 
  * @author Brian Chau
  *    email brian.chau@stonybrook.edu
- *    Stony Brook ID: brchau  
+ *    Stony Brook ID: 116125954  
  *    Recitation: 02
 **/
 import java.util.Scanner;
